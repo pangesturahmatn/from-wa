@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Form Checkout WhatsApp</title>
+      <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+      <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   </head>
+<body>
+    <div class="container">
+        <div class="col-lg-6 col-lg-offset-3">
+ <div class="w3-panel w3-round-small w3-orange">
+<h5><font color="white"><b>FROM BOOKING BENGKEL KAKI MOBIL ARUMSARI PUWROKERTO</b></font></h5></div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Checkout Ke WhatsApp
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Nama Pemilik Mobil</label>
+                        <input type="text" name="name" class="form-control" placeholder="Masukkan nama lengkap anda" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label>Domisili Pemilik Mobil</label>
+                        <input type="text" name="domisili" class="form-control" placeholder="Masukkan domisili lengkap anda" id="domisili">
+                    </div>
+                    <div class="form-group">
+                        <label>Merek, Tipe, Tahun & Warna Mobil</label>
+                        <input type="text" name="merek" class="form-control" placeholder="Masukkan Merek, Tipe, Tahun & Warna Mobil" id="merek">
+                    </div>
+                    <div class="form-group">
+                        <label>Plat Nomor Mobil</label>
+                        <input type="text" name="platno" class="form-control" placeholder="Masukkan Plat Nomor Mobil" id="platno">
+                    </div>
+                    <div class="form-group">
+                        <label>Keluhan Mobil</label>
+                        <input type="text" name="keluhan" class="form-control" placeholder="Masukkan Keluhan Mobil" id="keluhan">
+                    </div>
+                    <div class="form-group">
+                        <label>Rencana Kedatangan ke Bengkel kami (Tentukan Hari dan Jam)</label>
+                        <input type="text" name="rencana" class="form-control" placeholder="Rencana Kedatangan Hari dan Jam" id="rencana">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success send">Order Via WhatsApp</button>
+                    </div>
+                    <div id="text-info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+$(document).on('click','.send', function(){
+    /* Inputan Formulir */
+    var input_name          = $("#name").val(),
+        input_domisili         = $("#domisili").val(),
+        input_merek         = $("#merek").val(),
+        input_platno         = $("#platno").val(),
+        input_keluhan       = $("#keluhan").val(),
+        input_rencana   = $("#rencana").val();
+ 
+    /* Pengaturan Whatsapp */
+    var walink      = 'https://web.whatsapp.com/send',
+        phone       = '6285221486500',
+        text        = 'Halo Bengkel Arumsari Purwokerto saya ' + input_name + ' ingin Boking Service Mobil, berikut data saya ',
+        text_yes    = 'Terimakasih From Boking Anda berhasil terkirim.',
+        text_no     = 'Isilah formulir terlebih dahulu.';
+ 
+    /* Smartphone Support */
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        var walink = 'whatsapp://send';
+    }
+ 
+    if(input_name != "" && input_platno != "" && input_keluhan != ""){
+        /* Whatsapp URL */
+        var checkout_whatsapp = walink + '?phone=' + phone + '&text=' + text + '%0A%0A' +
+            '*Nama Pemilik Mobil* : ' + input_name + '%0A%0A' +
+            '*Domisili Pemilik Mobil* : ' + input_domisili + '%0A%0A' +
+            '*Merek, Tipe, Tahun dan Warna Mobil* : ' + input_merek + '%0A%0A' +
+            '*Plat Nomor Mobil* : ' + input_platno + '%0A%0A' +
+            '*Keluhan Mobil* : ' + input_keluhan + '%0A%0A' +
+            '*Rencana Kedatangan ke Bengkel Kami Hari dan Jam* : ' + input_rencana + '%0A%0A';
+            //'*Pesan* : ' + input_pesan + '%0A';
+ 
+        /* Whatsapp Window Open */
+        window.open(checkout_whatsapp,'_blank');
+        document.getElementById("text-info").innerHTML = '<div class="alert alert-success">'+text_yes+'</div>';
+    } else {
+        document.getElementById("text-info").innerHTML = '<div class="alert alert-danger">'+text_no+'</div>';
+    }
+});
+</script>
+</body>
+</html>
